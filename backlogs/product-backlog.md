@@ -9,7 +9,6 @@ permalink: /backlogs/product-backlog/
 | **ID** | **User Story / Task** | **Priority (1-10)** | **Estimate (SP)** | **Spike (Y/N)** | **Status** | **Assigned** |
 |--------|------------------------|--------------|--------------|------------|--------------|--------------|
 | RC-001 | As a Scrum Team, we want to identify the Sprint 4 Scrum Master and Product Owner so that I can ensure team responsibilities are clearly defined for the sprint, | 10 | 0 | Y | Done | Sebastian |
-| RC-004 | As a developer, I want to create a GitHub organization and repos for clients and servers so that I can collaborate using centralized version control. | 10 | 2 | Y | Done | Kevin |
 | RC-003 | As a Scrum Master, I want to facilitate Sprint Planning and story commitment so that I can help the team work with focus and alignment. | 8 | 2 | Y | In-Progress | Erick |
 | RC-002 | As a Product Owner, I want to manage the backlogs and focus on the Minimum Viable Product (MVP) and prioritize stories so that I can deliver value to users by the end of the sprint. | 8 | 2 | Y | In-Progress | Sebastian |
 | RC-011 | As a developer, I want to implement the risk calculation API using Node.js so that I can encapsulate the core business logic on the server side. | 8 | 6 | Y | Not Started | Kevin |
@@ -23,9 +22,11 @@ permalink: /backlogs/product-backlog/
 | RC-015 | As a developer, I want to deploy the client as an Azure static website so that I can provide users with a fast and accessible frontend. | 5 | 3 | Y | Not Started | Sebastian, Kaleb |
 | RC-018 | As a developer, I want to remove all unnecessary code from the Node.js servers so that I can improve maintainability and performance. | 4 | 3 | Y | Not Started | Erick, Kevin |
 | RC-016 | As a user, I want a visually appealing application that utilizes Tailwind to style the interface, allowing me to enjoy a modern and visually pleasing experience. | 3 | 5 | N | Not Started | Eddy |
-| RC-007 | As a user, I want to enter my age, height (in feet and inches), weight (lbs), blood pressure, and family history so that I can receive a personalized risk calculation. | 6 | 4 | N | -- | -- |
+| RC-007 | As a user, I want to enter my age, height (in feet and inches), weight (lbs), blood pressure, and family history so that I can receive a personalized risk calculation. | 6 | 4 | N | Not Started | Eddy |
 | RC-013 | As a developer, I want to configure local `.env` or config files for seamless local testing so that I can develop without environment conflicts. (fix) | 2 | 5 | N | -- | -- |
 | RC-017 | As a user, I want to identify and process my family history of hypertension so that I can understand how my health history affects my risk. | 1 | 3 | N | -- | -- |
 | RC-019 | As a user, I would like the application to run natively on my iPhone so that I can use it while driving. | 1 | -- | N | -- | -- |
+| RC-004 | As a developer, I want to create a GitHub organization and repos for clients and servers so that I can collaborate using centralized version control. | 1 | 2 | Y | Done | -- |
+
 
 Todo:
