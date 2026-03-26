@@ -1,0 +1,169 @@
+/*
+    Creators: Sebastian Jaculbe, Kaleb Richardson, Edward Rodriguez
+    Created: March 24th, 2026
+    Updated: March 24th, 2026
+    Version 1.0
+*/
+
+// Populate dropdowns
+const systolic = document.getElementById("systolic");
+const diastolic = document.getElementById("diastolic");
+const weight = document.getElementById("weight");
+const feet = document.getElementById("feet");
+const inches = document.getElementById("inches");
+const age = document.getElementById("age");
+const disease = document.getElementById("disease");
+
+// Ranges for Systolic
+for (let i=90; i<=200; i++){
+  let option = document.createElement("option"); // New dynamic element
+  option.value = i; //Default element value to 90
+  option.text = i; //Default element text value to 90
+  systolic.appendChild(option)
+}
+
+// Ranges for Diastolic
+for (let i=60; i<=140; i++){
+  let option = document.createElement("option");
+  option.value = i;
+  option.text = i;
+  diastolic.appendChild(option);
+}
+// Ranges for Height (Feet)
+for (let i=3; i<=7; i++){
+  let option = document.createElement("option");
+  option.value = i;
+  option.text = i;
+  feet.appendChild(option);
+}
+
+// Ranges for Weight (Pounds)
+for (let i=80; i<=400; i++){
+  let option = document.createElement("option");
+  option.value = i;
+  option.text = i;
+  weight.appendChild(option);
+}
+
+// Ranges for Height (Inches)
+for (let i=0; i<=11; i++){
+  let option = document.createElement("option");
+  option.value = i;
+  option.text = i;
+  inches.appendChild(option);
+}
+
+// Ranges for Age 
+for (let i=0; i<=100; i++){
+  let option = document.createElement("option");
+  option.value = i;
+  option.text = i;
+  age.appendChild(option);
+}
+
+//Ranges for Family Disease
+for (let i=0; i<3; i++){
+  let famDis = ["Diabetes", "Cancer", "Alzheimer's"];
+  let option = document.createElement("option");
+  option.value = famDis[i];
+  option.text = famDis[i];
+  disease.appendChild(option); 
+}
+
+// Calculates the Risk
+function calculateRisk(){
+  const sys = parseInt(systolic.value);
+  const dia = parseInt(diastolic.value);
+  const w = parseInt(weight.value);
+  const f = parseInt(feet.value);
+  const i = parseInt(inches.value);
+  const a = parseInt(age.value);
+  const d = document.getElementById("disease");
+  let points = 0;
+  let riskCat = "";
+  
+  // Convert height to meters
+  let totalInches = (f * 12) + i;
+  let meters = totalInches * 0.0254;
+
+  // Convert pounds to kilograms
+  let kilograms = (w * 0.453592);
+
+  // Body Mass Index
+  let bmi = (kilograms / (meters**2));
+
+  // Points for Blood Pressure
+  if (sys<120 && dia<80){
+    points+=0;
+  } else if ((sys>=120 && sys<=129) && dia<80) {
+    points+=15;
+  } else if ((sys>=130 && sys<=139) || (dia>=80 && dia<=89)){
+    points+=30;
+  } else if (sys>=140 || dia>=90) {
+    points+=75;
+  } else if (sys>180 || dia>120){
+    points+=100;
+  }
+
+  // Points for Body Mass Index
+  if (bmi>18.5 && bmi<24.9){
+    points+=0;
+  } else if (bmi>25 && bmi<29.9){
+    points+=30;
+  } else if (bmi>30 && bmi<34.9){
+    points+=75;
+  }
+
+  // Points for Age
+  if (a<30){
+    points+=0;
+  } else if (a<45){
+    points+=10;
+  } else if (a<60){
+    points+=20;
+  } else if (a>=60){
+    points+=30;
+  }
+
+  // Points for Family Disease
+  if (d == "Diabetes"){
+    points+=10;
+  } else if (d == "Cancer"){
+    points+=10;
+  } else if (d == "Alzheimer's"){
+    points+=10;
+  }
+
+  // Risk Category
+  if (points<=20){
+    riskCat+="Low Risk";
+  } else if (points<=50){
+    riskCat+="Moderate Risk";
+  } else if (points<=75){
+    riskCat+="High Risk";
+  } else if (points>75){
+    riskCat+="Uninsurable";
+  }
+
+  const finalResult = "Total Score: " + points + " - Risk Category: " + riskCat;
+  document.getElementById("result").innerHTML = finalResult;
+}
+
+// Function displays and closes the dropdown button
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
