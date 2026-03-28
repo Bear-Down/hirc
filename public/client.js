@@ -1,7 +1,7 @@
 /*
     Creators: Sebastian Jaculbe, Kaleb Richardson, Edward Rodriguez
     Created: March 24th, 2026
-    Updated: March 24th, 2026
+    Updated: March 28th, 2026
     Version 1.0
 */
 
@@ -70,6 +70,65 @@ for (let i=0; i<3; i++){
   disease.appendChild(option); 
 }
 
+// Calling APIs 
+function getData(){
+  fetch("/");
+}
+
+async function sendBPCat(){
+  const response = await fetch("/api/bp-category", {
+    method: "POST",
+    headers: {
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      systolic: parseInt(systolic.value),
+      diastolic: parseInt(diastolic.value)
+    })
+  });
+  const data = await response.json();
+  console.log("BP Category: ", data.category);
+  return data.category;
+}
+
+async function sendBMICat(){
+  const response = await fetch("/api/bmi", {
+    method: "POST",
+    headers: {
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      heightFeet: parseInt(feet.value),
+      heightInches: parseInt(inches.value),
+      weightPounds: parseInt(weight.value)
+    })
+  });
+  const data = await response.json();
+  console.log("BMI Category:", data.category);
+  return data.category;
+}
+
+async function sendRiskCat(){
+  const bp = await sendBPCat();
+  const bmiData = await sendBMICat();
+
+  const response = await fetch("/api/risk-category", {
+    method: "POST",
+    headers: {
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      age: parseInt(age.value),
+      bmiCategory: bmiData.category,
+      bpCategory: bp,
+      familyHistory: [disease.value.toLowerCase()]
+    })
+  });
+  const data = await response.json();
+  document.getElementById("result").innerHTML = "Score: ${data.score} - Risk: ${data.risk}";
+}
+
+/* IGNORE
 // Calculates the Risk
 function calculateRisk(){
   const sys = parseInt(systolic.value);
@@ -167,3 +226,4 @@ window.onclick = function(event) {
     }
   }
 }
+*/
