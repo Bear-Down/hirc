@@ -17,7 +17,7 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background-color: #ef0c0c;
+      background-color: #0cd4ef;
       margin: 0;
       padding: 0;
     }
@@ -40,6 +40,44 @@
       text-align: left;
       margin-top: 20px;
     }
+    label {
+      display: block;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+    }
+    select {
+  width: 220px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border 0.2s ease;
+}
+
+select:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+button {
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+button:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px);
+}
+.result {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
     .team-photo {
       width: 80%;
       max-width: 600px;
