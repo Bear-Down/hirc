@@ -4,6 +4,7 @@
     Updated: March 28th, 2026
     Version 1.0
 */
+const API_URL = "https://hirc-server-a3deh6hud4fnfjdh.canadacentral-01.azurewebsites.net/api"
 
 // Populate dropdowns
 const systolic = document.getElementById("systolic");
@@ -63,11 +64,11 @@ for (let i=0; i<=100; i++){
 
 // Calling APIs 
 function getData(){
-  fetch("/");
+  fetch(`${API_URL.replace('/api', '')}/ping`);
 }
 
 async function sendBPCat(){
-  const response = await fetch("/api/bp-category", {
+  const response = await fetch(`${API_URL}/bp-category`, {
     method: "POST",
     headers: {
       "Content-Type":"application/json"
@@ -83,7 +84,7 @@ async function sendBPCat(){
 }
 
 async function sendBMICat(){
-  const response = await fetch("/api/bmi", {
+  const response = await fetch(`${API_URL}/bmi`, {
     method: "POST",
     headers: {
       "Content-Type":"application/json"
@@ -104,130 +105,30 @@ async function sendRiskCat(){
     const bp = await sendBPCat();
     const bmiData = await sendBMICat();
 
-    const selectedDiseases = document.querySelectorAll('input[name="disease"]:checked');
+    const selectedDiseases = document.querySelectorAll(`input[name="disease"]:checked`);
     let familyHistory = [];
       selectedDiseases.forEach(d => {
         familyHistory.push(d.value);
       });
 
-    const response = await fetch("/api/risk-category", {
+    const response = await fetch(`${API_URL}/risk-category`, {
       method: "POST",
       headers: {
         "Content-Type":"application/json"
       },
       body: JSON.stringify({
         age: parseInt(age.value),
-        bmiCategory: bmiData.category,
+        bmiCategory: bmiData,
         bpCategory: bp,
         familyHistory: familyHistory
       })
     });
 
     const data = await response.json();
-    document.getElementById("result").innerHTML = "Score: ${data.score} - Risk: ${data.risk}";
+    document.getElementById("result").innerHTML = `Score: ${data.score} - Risk: ${data.risk}`;
 
   } catch (error) {
     console.error(error);
     document.getElementById("result").innerHTML = "Something went wrong";
   }
 }
-
-/* IGNORE
-// Calculates the Risk
-function calculateRisk(){
-  const sys = parseInt(systolic.value);
-  const dia = parseInt(diastolic.value);
-  const w = parseInt(weight.value);
-  const f = parseInt(feet.value);
-  const i = parseInt(inches.value);
-  const a = parseInt(age.value);
-  const d = document.getElementById("disease");
-  let points = 0;
-  let riskCat = "";
-  
-  // Convert height to meters
-  let totalInches = (f * 12) + i;
-  let meters = totalInches * 0.0254;
-
-  // Convert pounds to kilograms
-  let kilograms = (w * 0.453592);
-
-  // Body Mass Index
-  let bmi = (kilograms / (meters**2));
-
-  // Points for Blood Pressure
-  if (sys<120 && dia<80){
-    points+=0;
-  } else if ((sys>=120 && sys<=129) && dia<80) {
-    points+=15;
-  } else if ((sys>=130 && sys<=139) || (dia>=80 && dia<=89)){
-    points+=30;
-  } else if (sys>=140 || dia>=90) {
-    points+=75;
-  } else if (sys>180 || dia>120){
-    points+=100;
-  }
-
-  // Points for Body Mass Index
-  if (bmi>18.5 && bmi<24.9){
-    points+=0;
-  } else if (bmi>25 && bmi<29.9){
-    points+=30;
-  } else if (bmi>30 && bmi<34.9){
-    points+=75;
-  }
-
-  // Points for Age
-  if (a<30){
-    points+=0;
-  } else if (a<45){
-    points+=10;
-  } else if (a<60){
-    points+=20;
-  } else if (a>=60){
-    points+=30;
-  }
-
-  // Points for Family Disease
-  if (d == "Diabetes"){
-    points+=10;
-  } else if (d == "Cancer"){
-    points+=10;
-  } else if (d == "Alzheimer's"){
-    points+=10;
-  }
-
-  // Risk Category
-  if (points<=20){
-    riskCat+="Low Risk";
-  } else if (points<=50){
-    riskCat+="Moderate Risk";
-  } else if (points<=75){
-    riskCat+="High Risk";
-  } else if (points>75){
-    riskCat+="Uninsurable";
-  }
-
-  const finalResult = "Total Score: " + points + " - Risk Category: " + riskCat;
-  document.getElementById("result").innerHTML = finalResult;
-}
-
-// Function displays and closes the dropdown button
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-*/
