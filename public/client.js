@@ -78,6 +78,11 @@ async function sendBPCat(){
       diastolic: parseInt(diastolic.value)
     })
   });
+
+  if (!response.ok) {
+    throw new Error(`Server error: ${response.status}`);
+  }
+
   const data = await response.json();
   console.log("BP Category: ", data.category);
   return data.category;
@@ -95,6 +100,11 @@ async function sendBMICat(){
       weightPounds: parseInt(weight.value)
     })
   });
+
+  if (!response.ok) {
+    throw new Error(`Server error: ${response.status}`);
+  }
+
   const data = await response.json();
   console.log("BMI Category:", data.category);
   return data.category;
