@@ -61,15 +61,6 @@ for (let i=0; i<=100; i++){
   age.appendChild(option);
 }
 
-//Ranges for Family Disease
-for (let i=0; i<3; i++){
-  let famDis = ["Diabetes", "Cancer", "Alzheimer's"];
-  let option = document.createElement("option");
-  option.value = famDis[i];
-  option.text = famDis[i];
-  disease.appendChild(option); 
-}
-
 // Calling APIs 
 function getData(){
   fetch("/");
@@ -109,23 +100,36 @@ async function sendBMICat(){
 }
 
 async function sendRiskCat(){
-  const bp = await sendBPCat();
-  const bmiData = await sendBMICat();
+  try {
+    const bp = await sendBPCat();
+    const bmiData = await sendBMICat();
 
-  const response = await fetch("/api/risk-category", {
-    method: "POST",
-    headers: {
-      "Content-Type":"application/json"
-    },
-    body: JSON.stringify({
-      age: parseInt(age.value),
-      bmiCategory: bmiData.category,
-      bpCategory: bp,
-      familyHistory: [disease.value.toLowerCase()]
-    })
-  });
-  const data = await response.json();
-  document.getElementById("result").innerHTML = "Score: ${data.score} - Risk: ${data.risk}";
+    const selectedDiseases = document.querySelectorAll('input[name="disease"]:checked');
+    let familyHistory = [];
+      selectedDiseases.forEach(d => {
+        familyHistory.push(d.value);
+      });
+
+    const response = await fetch("/api/risk-category", {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        age: parseInt(age.value),
+        bmiCategory: bmiData.category,
+        bpCategory: bp,
+        familyHistory: familyHistory
+      })
+    });
+
+    const data = await response.json();
+    document.getElementById("result").innerHTML = "Score: ${data.score} - Risk: ${data.risk}";
+
+  } catch (error) {
+    console.error(error);
+    document.getElementById("result").innerHTML = "Something went wrong";
+  }
 }
 
 /* IGNORE
