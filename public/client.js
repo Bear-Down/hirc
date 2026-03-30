@@ -13,7 +13,7 @@ const weight = document.getElementById("weight");
 const feet = document.getElementById("feet");
 const inches = document.getElementById("inches");
 const age = document.getElementById("age");
-const disease = document.getElementById("disease");
+const resultDisplay = document.getElementById("result");
 
 // Ranges for Systolic
 for (let i=90; i<=200; i++){
@@ -78,6 +78,11 @@ async function sendBPCat(){
       diastolic: parseInt(diastolic.value)
     })
   });
+
+  if (!response.ok) {
+    throw new Error(`Server error: ${response.status}`);
+  }
+
   const data = await response.json();
   console.log("BP Category: ", data.category);
   return data.category;
@@ -95,6 +100,11 @@ async function sendBMICat(){
       weightPounds: parseInt(weight.value)
     })
   });
+
+  if (!response.ok) {
+    throw new Error(`Server error: ${response.status}`);
+  }
+
   const data = await response.json();
   console.log("BMI Category:", data.category);
   return data.category;
@@ -102,6 +112,9 @@ async function sendBMICat(){
 
 async function sendRiskCat(){
   try {
+    // Clear previous results
+    if (resultDisplay) resultDisplay.innerHTML = "Calculating...";
+
     const bp = await sendBPCat();
     const bmiData = await sendBMICat();
 
@@ -124,11 +137,19 @@ async function sendRiskCat(){
       })
     });
 
+    if (!response.ok) {
+      throw new Error(`Risk calculation failed: ${response.status}`);
+    }
+
     const data = await response.json();
-    document.getElementById("result").innerHTML = `Score: ${data.score} - Risk: ${data.risk}`;
+    if (resultDisplay) {
+      resultDisplay.innerHTML = `Score: ${data.score} - Risk: ${data.risk}`;
+    }
 
   } catch (error) {
-    console.error(error);
-    document.getElementById("result").innerHTML = "Something went wrong";
+    console.error("Calculation Error:", error);
+    if (resultDisplay) {
+      resultDisplay.innerHTML = "Error: Could not calculate risk. Please check server connection.";
+    }
   }
 }
