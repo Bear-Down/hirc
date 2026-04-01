@@ -1,7 +1,8 @@
 /*
-    Creators: Sebastian Jaculbe, Kaleb Richardson, Edward Rodriguez
+    Creators: Sebastian Jaculbe, Kaleb Richardson, Edward Rodriguez,
+              Kevin Dacanay
     Created: March 24th, 2026
-    Updated: March 28th, 2026
+    Updated: March 31th, 2026
     Version 1.0
 */
 const API_URL = "https://hirc-server-a3deh6hud4fnfjdh.canadacentral-01.azurewebsites.net/api"
