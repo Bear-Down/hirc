@@ -1,165 +1,166 @@
 <!--
-    Creators: Sebastian Jaculbe, Kaleb Richardson, Edward Rodriguez
-    Created: March 24th, 2026
-    Updated: March 28th, 2026
-    Version 1.0
+		Creators: Sebastian Jaculbe, Kaleb Richardson, Edward Rodriguez,
+				  Kevin Dacanay
+		Created: March 24th, 2026
+		Updated: March 31th, 2026
+		Version 1.0
 -->
 
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>High Insurance Risk Calculator</title>
-  <link rel="icon" type="image/x-icon" href="">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #0cd4ef;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #fefbfb;
-      color: rgb(0, 0, 0);
-      padding: 20px 0;
-      font-size:1.6rem;
-      letter-spacing: 1px;
-    }
-    main {
-      padding: 20px;
-    }
-    form {
-      display: inline-block;
-      background: #f8f7f7;
-      padding: 25px 35px;
-      border-radius: 10px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      text-align: left;
-      margin-top: 20px;
-    }
-    label {
-      display: block;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  font-weight: bold;
-    }
-    select {
-  width: 220px;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  transition: border 0.2s ease;
-}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>High Insurance Risk Calculator</title>
+	<link rel="icon" type="image/x-icon" href="">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+			background-color: #0cd4ef;
+			margin: 0;
+			padding: 0;
+		}
+		header {
+			background-color: #fefbfb;
+			color: rgb(0, 0, 0);
+			padding: 20px 0;
+			font-size:1.6rem;
+			letter-spacing: 1px;
+		}
+		main {
+			padding: 20px;
+		}
+		form {
+			display: inline-block;
+			background: #f8f7f7;
+			padding: 25px 35px;
+			border-radius: 10px;
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+			text-align: left;
+			margin: 20px;
+		}
+		label {
+			display: block;
+			margin-top: 10px;
+			margin-bottom: 5px;
+			font-weight: bold;
+		}
+		select {
+			width: 220px;
+			padding: 8px;
+			border-radius: 6px;
+			border: 1px solid #ccc;
+			transition: border 0.2s ease;
+		}
 
-select:focus {
-  border-color: #0077cc;
-  outline: none;
-}
-button {
-  margin-top: 20px;
-  padding: 10px 25px;
-  background-color: #0077cc;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-button:hover {
-  background-color: #005fa3;
-  transform: translateY(-2px);
-}
-#result {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-    .team-photo {
-      width: 80%;
-      max-width: 600px;
-      margin: 20px auto;
-      display: block;
-      border: 3px solid #ccc;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    li {
-      margin: 10px 0;
-    }
-    a {
-      color: #0077cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    section {
-      margin-top: 40px;
-    }
-  </style>
+		select:focus {
+			border-color: #0077cc;
+			outline: none;
+		}
+		button {
+			margin: 20px auto;
+			padding: 10px 35px;
+			background-color: #0077cc;
+			color: white;
+			border: none;
+			border-radius: 8px;
+			font-size: 1rem;
+			cursor: pointer;
+			transition: all 0.2s ease;
+
+			display: block;
+		}
+		button:hover {
+			background-color: #005fa3;
+			transform: translateY(-2px);
+		}
+		#result {
+			margin-top: 20px;
+			font-size: 1.2rem;
+			font-weight: bold;
+			align-items: center;
+			justify-content: center;			
+		}
+
+		ul {
+			list-style-type: none;
+			padding: 0;
+		}
+		li {
+			margin: 10px 0;
+		}
+		a {
+			color: #0077cc;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+		section {
+			margin-top: 40px;
+		}
+	</style>
 </head>
 
 <!--Main Content-->
 <body>
-  <header>
-    <h1>Health Insurance Risk Calculator</h1>
-  </header>
-  <main>
-    <h2>Blood Pressure</h2>
-    <br>
-    <img src="">
-    <form action="#" id="form">
-      <!--Systolic-->
-      <label for="blood-pressure-1">Systolic</label>
-      <select id="systolic"></select>
-      <br>
-      <br>
-      <!--Diastolic-->
-      <label for="blood-pressure-2">Diastolic</label>
-      <select id="diastolic"></select>
-      <br>
-      <br>
-      <!--Weight-->
-      <label for="bmi-1">Weight (lbs)</label>
-      <select id="weight"></select>
-      <br>
-      <br>
-      <!--Height-->
-      <label for="bmi-2">Height (Feet)</label>
-      <select id="feet"></select>
-      <br>
-      <br>
-      <label for="bmi-3">Height (Inches)</label>
-      <select id="inches"></select>
-      <br>
-      <br>
-      <!--Age-->
-      <label>Age</label>
-      <select id="age"></select>
-      <br>
-      <br>
-      <!--Family Disease-->
-      <label>Family Disease</label>
-      <br>
-      <label>
-        <input type="checkbox" name="disease" value="diabetes"> Diabetes
-      </label><br>
-      <label>
-        <input type="checkbox" name="disease" value="cancer"> Cancer
-      </label><br>
-      <label>
-        <input type="checkbox" name="disease" value="alzheimers"> Alzheimer's 
-      </label>
-      <br>
-      <button type="button" onclick="sendRiskCat()">Calculate Risk</button>
-    </form>
-    <p id="result"></p>
-  </main>
-  <script src="client.js"></script>
+	<header>
+		<h1>Health Insurance Risk Calculator</h1>
+		<h5 style="color: orange; text-shadow: 1px 1px #ccc">Bear Down</h5>
+	</header>
+	<main>
+		<br>
+		<form action="#" id="form">
+			<!--Systolic-->
+			<h3>Blood Pressure (BP)</h3>
+			<label for="blood-pressure-1">Systolic </label>
+			<select id="systolic"></select>
+			<br>
+			<br>
+			<!--Diastolic-->
+			<label for="blood-pressure-2">Diastolic</label>
+			<select id="diastolic"></select>
+			<br>
+			<br>
+			<!--Weight-->
+			<h3>Body Mass Index (BMI)</h3>
+			<label for="bmi-1">Weight (lbs)</label>
+			<select id="weight"></select>
+			<br>
+			<br>
+			<!--Height-->
+			<label for="bmi-2">Height (Feet)</label>
+			<select id="feet"></select>
+			<br>
+			<br>
+			<label for="bmi-3">Height (Inches)</label>
+			<select id="inches"></select>
+			<br>
+			<br>
+			<!--Age-->
+			<h3>Additional Information</h3>
+			<label>Age</label>
+			<select id="age"></select>
+			<br>
+			<br>
+			<!--Family Disease-->
+			<label>Family Disease</label>
+			<br>
+			<label>
+				<input type="checkbox" name="disease" value="diabetes"> Diabetes
+			</label>
+			<label>
+				<input type="checkbox" name="disease" value="cancer"> Cancer
+			</label>
+			<label>
+				<input type="checkbox" name="disease" value="alzheimers"> Alzheimer's 
+			</label>
+			<br>
+			<button type="button" onclick="sendRiskCat()">Calculate Risk</button>
+		</form>
+		<p id="result"></p>
+	</main>
+	<script src="client.js"></script>
 </body>
 </html>
